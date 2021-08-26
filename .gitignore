@@ -1,0 +1,7 @@
+venv/
+**/__pycache__/
+**/*.pyc 
+**/migrations/0**.*
+.vscode/
+core/settings.py 
+.env

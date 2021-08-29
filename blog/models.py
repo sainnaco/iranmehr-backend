@@ -16,6 +16,8 @@ class Article(models.Model):
     stutus = models.BooleanField(default=False)
     seen_count = models.IntegerField(default=1)
 
+    
+
     def __str__(self):
         return self.title
 

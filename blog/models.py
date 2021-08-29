@@ -14,6 +14,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     stutus = models.BooleanField(default=False)
+    seen_count = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title

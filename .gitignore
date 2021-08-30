@@ -3,5 +3,5 @@ venv/
 **/*.pyc 
 **/migrations/0**.*
 .vscode/
-core/settings.py 
+# core/settings.py 
 .env

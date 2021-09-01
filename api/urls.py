@@ -1,13 +1,15 @@
-from django.urls import path
+from rest_framework import routers
+from django.urls import path , include
 from .views import *
 
 
 app_name = 'api'
 
+router = routers.SimpleRouter()
+router.register('users', UserViewSet,basename='users')
+router.register('articles', ArticleViewSet,basename='articles')
 
 urlpatterns = [
-    path('',ArticleViewSet,name='articles'),
-    path('users/',UserViewSet,name='user'),
-    # path('users/<int:pk>',UserDetail.as_view(),name='list'),
-    # path('<slug:slug>',ArticleDetail.as_view(),name='list'),
+    path('',include(router.urls)),
+    path('categories/',CategoryView.as_view(),name='categories'),
 ]

@@ -5,3 +5,6 @@ venv/
 .vscode/
 # core/settings.py 
 .env
+media/
+static/
+db.sqlite/

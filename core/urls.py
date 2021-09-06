@@ -26,7 +26,8 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     # path('auth/', include('djoser.social.urls')),
-    path('api/', include('api.urls')),
+    path('api/v1/', include('api_roots.v1')),
+    path('adobe-api/', include('adobe.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
 ]

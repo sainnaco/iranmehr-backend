@@ -41,7 +41,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d', verbose_name="وضعیت")
-    priority = models.ForeignKey('Priority', on_delete=models.CASCADE,verbose_name="الویت مقاله")
+    # priority = models.ForeignKey('Priority', on_delete=models.CASCADE,verbose_name="الویت مقاله")
 
     class Meta:
         verbose_name = "مقاله"
@@ -103,21 +103,21 @@ class Category(models.Model):
     #             article.save()
     #     super(Category, self).save(*args, **kwargs)
 
-class Priority(models.Model):
-    level_one = models.BooleanField(default=True,verbose_name='اولویت عادی')
-    level_two = models.BooleanField(default=False,verbose_name='اولویت متوسط')
-    level_tree = models.BooleanField(default=False,verbose_name='اولویت مهم')
-    level_four = models.BooleanField(default=False,verbose_name='الویت بسیار مهم')
+# class Priority(models.Model):
+#     level_one = models.BooleanField(default=True,verbose_name='اولویت عادی')
+#     level_two = models.BooleanField(default=False,verbose_name='اولویت متوسط')
+#     level_tree = models.BooleanField(default=False,verbose_name='اولویت مهم')
+#     level_four = models.BooleanField(default=False,verbose_name='الویت بسیار مهم')
 
-    def __str__(self):
-        if self.level_four :
-            return 'بسیار مهم'
-        elif self.level_tree :
-            return 'مهم'
-        elif self.level_two :
-            return 'نسبتا مهم'
-        else :
-            return 'عادی'  
+#     def __str__(self):
+#         if self.level_four :
+#             return 'بسیار مهم'
+#         elif self.level_tree :
+#             return 'مهم'
+#         elif self.level_two :
+#             return 'نسبتا مهم'
+#         else :
+#             return 'عادی'  
 
 
 

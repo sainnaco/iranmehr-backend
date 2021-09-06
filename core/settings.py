@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # واسه هندل چنتا روش هست..نیاز به سایت ای دی داره
+    'django.contrib.sites',  
+    
     # third party
     'rest_framework',
     'django_filters',
@@ -50,8 +51,8 @@ INSTALLED_APPS = [
 
     # my apps
     'blog.apps.BlogConfig',
-    'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
+    'adobe.apps.AdobeConfig',
     # 'auth.apps.AuthAppConfig',
 ]
 
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 

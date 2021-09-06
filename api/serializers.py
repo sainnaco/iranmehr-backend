@@ -19,20 +19,24 @@ from drf_dynamic_fields import DynamicFieldsMixin
 class ArticleSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = [
+            'author',
+            'title',
+            'slug',
+            'category',
+            'description',
+            'thumbnail',
+            'publish',
+            'created',
+            'updated',
+            'status',
+        ]
 
-    # class ArticleSerializer(serializers.ModelSerializer):
-    #     class Meta:
-    #         model = Article
-    #         fields = '__all__'
-    #         # exclude = ('created','updated')
-
-    #واسه یک فیلد
     def validate_title(self, value):
         filter_list = ['x','y','z']
         for i in filter_list:
             if i in value:
-                raise serializers.ValidationError('not allowed :{}'.format(i))
+                raise serializers.ValidationError('این کلمات مجاز نیستند :{}'.format(i))
 
 class UserSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
     class Meta:
@@ -40,3 +44,7 @@ class UserSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ('created','updated')
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

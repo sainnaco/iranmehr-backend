@@ -13,14 +13,17 @@ class UserAccountManager(BaseUserManager):
         user.set_password(password)
         user.save()    
         return user
-    def create_superuser(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('Users must have an email address')
+    def create_superuser(self, email, password,**extra_fields):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(email,password=password,**extra_fields)
 
-        email = self.normalize_email(email) #تبدیل حروف بزرگ ایمیل به کوچک
-        user = self.model(email=email, **extra_fields) #هش کردن پسوورد
-
-        user.set_password(password)
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.is_active = True
         user.save()
         return user
 
@@ -29,6 +32,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=250)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+
 
     objects = UserAccountManager()
 

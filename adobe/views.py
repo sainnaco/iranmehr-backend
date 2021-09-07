@@ -1,111 +1,118 @@
 import requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.http import HttpResponse
 import xml.etree.ElementTree as ET
 import xmltodict
-import json
-# action
-#     'principal-list'
-#     'common-info'
-# xml. etree. ElementTree. tostring(element, encoding="unicode")
+
 
 BASE_URL = 'https://class.r-ayandehsazan.ir/api/xml?'
-# 'https://class.r-ayandehsazan.ir/api/'
 
-base_url = 'https://class.r-ayandehsazan.ir/'
 
-# 'https://class.r-ayandehsazan.ir/api/xml?action=principal-list&filter-email=rezataghipour1999@gmail.com/'
-BASE_AUTH_URL = 'https://class.r-ayandehsazan.ir/account-id=7&principal-id=31016&showNotif=true&OWASP_CSRFTOKEN=fdc96e761f6bc41b0b0f3c6aea6bb6534c08cc05d5676a783acad23bd15b1926/'
+def get_cookies(username, password):
+    try:
+        response = requests.get(
+            f'{BASE_URL}action=login&login={username}&password={password}')
+        print(response.headers)
+        BREEZESESSION = response.headers.get(
+            'Set-Cookie').split(';')[0].split('=')[1]
 
-@api_view(['GET','POST'])
-def adobe_login(request):    
-    username = request.GET.get('username')
-    password = request.GET.get('password')
-   
-    try :
-        response = requests.get(f'{BASE_URL}action=login&login={username}&password={password}')
-        print(response.headers.get('Set-Cookie'))
-        # h_obj = json.dumps(response.headers)
+    except:
+        print('not good')
+    return BREEZESESSION
 
-        obj = response.headers.get('Set-Cookie').split(';')[0].split('=')[1]
-        # headers = xmltodict.parse(response.headers)
-        # header_obj = json.dumps(headers)
-        # print(header_obj)
-    
+@api_view(['GET', 'POST'])
+def adobe_login(request):
+    try:
+        username = request.GET.get('username')
+        password = request.GET.get('password')
+        print('username : '+username)
+        print('password : '+password)
+        BREEZESESSION = get_cookies(username, password)
+        response = requests.get(
+            f'{BASE_URL}action=login&login={username}&password={password}&session={BREEZESESSION}')
+        obj = xmltodict.parse(response.text)
     except:
         print('not good')
     return Response(obj)
-    
 
-
-@api_view(['GET','POST'])
-def get_common_info(request):
-
-    BREEZESESSION = request.GET.get('BREEZESESSION')
-    print('B :'+BREEZESESSION)
-
-    data = {}
-    querystring = {"action":"common-info"}
-    payload = ""
-    headers = {"Cookie": f"BREEZESESSION={BREEZESESSION};"}
-
+@api_view(['GET', 'POST'])
+def common_info(request):
     try:
-        response = requests.request("GET", 'https://class.r-iranmehr.ir/api/xml', data=payload, headers=headers, params=querystring)
-        print(response.text)
-        # tree = ET.fromstring(response.content)
-        # user = (tree.find('common')).find('user')
-        # data['name'] = (user.find('name')).text
-        # data['login'] = (user.find('login')).text
-        obj = xmltodict.parse(response.text)
-
+        username = request.GET.get('username')
+        password = str(request.GET.get('password'))
+        print('username : '+username)
+        print('password : '+password)
+        BREEZESESSION = get_cookies(username, password)
+        response = requests.get(
+            f'{BASE_URL}action=common-info&session={BREEZESESSION}')
+        common_info = xmltodict.parse(response.content)
     except:
-        data['error'] = None
-    return Response(obj)
-
-    # try:
-    #     response = requests.get(f'{BASE_URL}action=common-info&session={BREEZESESSION}')
-    #     print('okkkkkkkkkk')
-    #     # print(response.)
-    #     # print('s :'+response.status)
-    #     # print('h :'+response.headers)
-    #     # print('c :'+response.content)
-
-    #     obj = xmltodict.parse(response.text)
-
-    # except:
-    #     print('not good')
-
+        print('not good')
+    return Response(common_info)
 
 
 @api_view(['GET'])
 def get_principal_list(request):
+    try:
+        username = request.GET.get('username')
+        password = request.GET.get('password')
+        print('username : '+username)
+        print('password : '+password)
+        BREEZESESSION = get_cookies(username, password)
+        response = requests.get(
+            f'{BASE_URL}action=principal-list&session={BREEZESESSION}')
+        principal_list = xmltodict.parse(response.content)
+    except:
+        print('not good')
+    return Response(principal_list)
 
-    email = request.GET.get('email')
-    url = f'{BASE_URL}xml?action=principal-list&filter-email={email}'
-    adobe_response = requests.get(url)
-    obj = xmltodict.parse(adobe_response.text)
-    j_obj = json.dumps(obj)
-    print(j_obj)
 
+@api_view(['GET'])
+def report_my_meetings(request):
+    try:
+        username = request.GET.get('username')
+        password = request.GET.get('password')
+        print('username : '+username)
+        print('password : '+password)
+        BREEZESESSION = get_cookies(username, password)
+        response = requests.get(
+            f'{BASE_URL}action=report-my-meetings&session={BREEZESESSION}')
+        my_meetings = xmltodict.parse(response.content)
+    except:
+        print('not good')
+    return Response(my_meetings)
+
+
+def create_adobe_user(request):
+    try:
+        first_name = request.GET.get('firstname')
+        last_name = request.GET.get('lastname')
+        login = request.GET.get('login')
+        password = request.GET.get('password')
+        email = request.GET.get('email')
+        print('first_name : '+first_name +
+              'last_name : '+last_name +
+              'login : '+login +
+              'email : '+email
+              )
+        response = requests.get(
+            f'{BASE_URL}action=principal-update&first-name={first_name}&last-name={last_name}&login={login}&password={password}&type=user&send-email=true&has-children=0&email={email}')
+        obj = xmltodict.parse(response.content)
+    except:
+        print('not good')
     return Response(obj)
+
+@api_view(['GET'])
+def create_adobe_group():
+    pass
 
 
 
 @api_view(['GET'])
 def report_bulk_users():
+    pass
 
-    url =f'{BASE_URL}xml?action=report-bulk-users/'
-    adobe_response = requests.get(url)
-    obj = xmltodict.parse(adobe_response.text)
-
-    return Response(obj)    
 
 @api_view(['POST'])
-def principals_of_manager(request):
-    manager_id = request.GET.get('manager-id')
-    url =f'{BASE_URL}xml?action=principal-list&filter-manager-id={manager_id}'
-    adobe_response = requests.get(url)
-    obj = xmltodict.parse(adobe_response.text)
-
-    return Response(obj)     
+def principals_of_manager():
+    pass

@@ -1,17 +1,22 @@
 from django.contrib import admin
 
-from django.contrib import admin
-from blog.models import Article, Category  #Priority IpAddress Comment
+from blog.models import *
 from .actions import make_published, make_draft
 from accounts.models import UserAccount
 
 User = UserAccount
 
-class CategoryAdmin(admin.ModelAdmin):
-	list_display = ('position', 'title','slug','status')
-	list_filter = (['status'])
-	search_fields = ('title', 'slug')
-	prepopulated_fields = {'slug': ('title',)}
+# class CategoryAdmin(admin.ModelAdmin):
+# 	list_display = ('get_main_category','sub_category')
+# 	list_filter = (['main_category'])
+# 	search_fields = ('main_category','sub_category')
+	# prepopulated_fields = {'slug': ('title',)}
+
+# class SubCategoryAdmin(admin.ModelAdmin):
+# 	list_display = ('position', 'title','slug','status')
+# 	list_filter = (['status'])
+# 	search_fields = ('title', 'slug')
+# 	prepopulated_fields = {'slug': ('title',)}
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -29,15 +34,10 @@ class ArticleAdmin(admin.ModelAdmin):
 	actions = [make_published, make_draft]
 
 
-class CommentAdmin(admin.ModelAdmin):
-	list_display = ('article', 'user','content', 'author', 'answer', 'status')
-	list_filter = ('article__author', 'status')
-	search_fields = ('content',)
-	ordering = ['-status', '-created']
+
 
 
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(Category, CategoryAdmin)
 # admin.site.register(Priority)
 # admin.site.register(Comment, CommentAdmin)
 # admin.site.register(IpAddress)

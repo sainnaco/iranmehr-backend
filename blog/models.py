@@ -7,7 +7,9 @@ from django.urls import reverse
 from django.utils.html import format_html
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from categories.models import Category
 from extensions.utils import jalali_converter
+
 
 User = get_user_model()
 
@@ -29,9 +31,9 @@ class Article(models.Model):
                                related_name='articles', verbose_name="نویسنده")
     title = models.CharField(max_length=200, verbose_name="عنوان مقاله")
     slug = models.SlugField(max_length=100, unique=True,
-                            verbose_name="آدرس مقاله")
-    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL,
-                                 verbose_name="دسته‌بندی", related_name="articles")
+                            verbose_name="اسلاگ مقاله")
+    article_category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL,
+                                 verbose_name=" دسته‌بندی اصلی", related_name="articles")
     description =RichTextUploadingField(null=True,blank=True,verbose_name="محتوا")
     # thumbnails = models.ImageField(upload_to="images/article",blank=True,null=True,verbose_name="تصویر ۶۴۰x۳۶۰ مقاله")
     thumbnail = models.ImageField(null=True,blank=True,upload_to="images/article")
@@ -41,7 +43,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d', verbose_name="وضعیت")
-    # priority = models.ForeignKey('Priority', on_delete=models.CASCADE,verbose_name="الویت مقاله")
+    # view_count = models.IntegerField(default=1,blank=True,null=True ,verbose_name='تعداد بازدید')
 
     class Meta:
         verbose_name = "مقاله"
@@ -73,28 +75,6 @@ class Article(models.Model):
     #     super(Article, self).save(*args, **kwargs)
 
 
-class CategoryManager(models.Manager):
-    def active(self):
-        return self.filter(status=True)
-
-
-class Category(models.Model):
-    title = models.CharField(max_length=200, verbose_name="عنوان دسته‌بندی")
-    slug = models.SlugField(max_length=100, unique=True,
-                            verbose_name="آدرس دسته‌بندی")
-    status = models.BooleanField(
-        default=True, verbose_name="آیا نمایش داده شود؟")
-    position = models.IntegerField(verbose_name="پوزیشن")
-
-    class Meta:
-        verbose_name = "دسته‌بندی"
-        verbose_name_plural = "دسته‌بندی ها"
-        ordering = ['position']
-
-    def __str__(self):
-        return self.title
-
-    objects = CategoryManager()
 
     # def save(self, *args, **kwargs):
     #     if not self.status:

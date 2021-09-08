@@ -2,7 +2,6 @@
 # اینارو کامنت کردم چون میخام خودم ویوست بنویسم
 # from rest_framework.generics import RetrieveAPIView  #ListAPIView , RetrieveUpdateDestroyAPIView ,ListCreateAPIView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import ListCreateAPIView
 # from rest_framework.permissions import IsAuthenticated
 from blog.models import *
 from .serializers import *
@@ -28,7 +27,3 @@ class ArticleViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-class CategoryView(ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    permission_classes = (IsStaffOrReadOnly,) #فقط سوپریوزر قادر به تعین کنگوری باشد

@@ -1,6 +1,6 @@
 from rest_framework import routers
 from django.urls import path ,include
-from .blog_api_views import *
+from .views import *
 
 
 
@@ -12,7 +12,6 @@ router.register('articles', ArticleViewSet,basename='articles')
 
 urlpatterns = [
     path('',include(router.urls)),
-    path('categories/',CategoryView.as_view(),name='categories'),
 ]
 
 # urlpatterns = [

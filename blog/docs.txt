@@ -1,0 +1,18 @@
+api/v1/blog/articles/ :  list of articles
+api/v1/blog/articles/?status=d&author=pk : filter by status d= draft and p= publish and also by author primary key
+...................................................
+api/v1/blog/categories/   : to create a new category
+{
+    "id": 2, #خودکار ساخته میشود
+    "title": "پزشکی",
+    "slug": "test-slug", 
+    "status": true, #برای نمایش یا عدم نمایش دسته بندی
+    "position": 1 #این برای ترتیب دسته بندی ها است
+}
+................................
+api/users/  :  list of users
+api/users/?search=reza : shearch by name and email address
+api/users/?ordering=is_active  ~is_active:for people who active their account via email.
+				~is_admin:for students admin.
+				~is_staff : for school emploeis.
+api/users/<pk>/  : for one user

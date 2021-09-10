@@ -9,9 +9,14 @@ class SubCategoryAdmin(admin.ModelAdmin):
 	# prepopulated_fields = {'slug': ('title',)}
 
 class CategoryAdmin(admin.ModelAdmin):
+	list_display = ('main_category','category_to_str')
 	list_filter = (['main_category','sub_category'])
 	search_fields = ('main_category', 'sub_category')
 	filter_horizontal = ['sub_category']
+
+	def category_to_str(self,obj):
+		return ",".join([category.title for category in obj.sub_category.all()])
+	category_to_str.short_description = 'دسته بندی فرعی'
 
 admin.site.register(MainCategory)
 admin.site.register(SubCategory,SubCategoryAdmin)

@@ -10,11 +10,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from categories.models import Category
 from extensions.utils import jalali_converter
 
-
 User = get_user_model()
-
-# Create your models here.
-
 
 class ArticleManager(models.Manager):
     def published(self):
@@ -29,21 +25,21 @@ class Article(models.Model):
 
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL,
                                related_name='articles', verbose_name="نویسنده")
-    title = models.CharField(max_length=200, verbose_name="عنوان مقاله")
+    title = models.CharField(max_length=200,null=True,blank=True, verbose_name="عنوان مقاله")
     slug = models.SlugField(max_length=100, unique=True,
                             verbose_name="اسلاگ مقاله")
     article_category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL,
                                  verbose_name=" دسته‌بندی اصلی", related_name="articles")
     description =RichTextUploadingField(null=True,blank=True,verbose_name="محتوا")
     # thumbnails = models.ImageField(upload_to="images/article",blank=True,null=True,verbose_name="تصویر ۶۴۰x۳۶۰ مقاله")
-    thumbnail = models.ImageField(null=True,blank=True,upload_to="images/article")
+    thumbnail = models.ImageField(default='test.png',null=True,blank=True,upload_to="images/article")
     publish = models.DateTimeField(
         default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d', verbose_name="وضعیت")
-    # view_count = models.IntegerField(default=1,blank=True,null=True ,verbose_name='تعداد بازدید')
+    #view_count = models.IntegerField(default=1,blank=True,null=True ,verbose_name='تعداد بازدید')
 
     class Meta:
         verbose_name = "مقاله"

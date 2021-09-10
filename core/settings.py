@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'adobe.apps.AdobeConfig',
     'categories.apps.CategoriesConfig',
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [

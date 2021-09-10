@@ -12,9 +12,9 @@ from rest_framework import filters #خصوصی بدیم ولی گلوبال دا
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    filterset_fields = ['stutus','author'] #or author__username #علاوه بر علامت مساوی علامت های دیگر هم هست
-    search_fields = ['title','author','content']
-    ordering_fields = ['publish','stutus']
+    filterset_fields = ['status','author','title','slug'] #or author__username #علاوه بر علامت مساوی علامت های دیگر هم هست
+    search_fields = ['title','author','content','slug']
+    ordering_fields = ['publish','status']
 
     def get_permissions(self):
         """

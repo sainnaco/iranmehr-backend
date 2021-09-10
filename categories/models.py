@@ -8,10 +8,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = "دسته بندی"
         verbose_name_plural = "دسته بندی ها"
-
+   
 
     def __str__(self):
-        return 'دسته بندی'
+        return f'{self.main_category}'
 
 class MainCategory(models.Model):
     main_category = models.CharField(max_length=250,blank=True,null=True ,verbose_name='دسته بندی اصلی')

@@ -9,7 +9,7 @@ class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     filterset_fields = ['main_category','sub_category'] #or author__username #علاوه بر علامت مساوی علامت های دیگر هم هست
     search_fields = ['main_category','sub_category']
-    # ordering_fields = []
+    # ordering_fields = ['']
 
     def get_permissions(self):
 

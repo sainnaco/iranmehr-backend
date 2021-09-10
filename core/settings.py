@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-# import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # واسه هندل چنتا روش هست..نیاز به سایت ای دی داره
+    'django.contrib.sites',  
+    
     # third party
     'rest_framework',
     'django_filters',
@@ -50,9 +50,10 @@ INSTALLED_APPS = [
 
     # my apps
     'blog.apps.BlogConfig',
-    'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
-    # 'auth.apps.AuthAppConfig',
+    'adobe.apps.AdobeConfig',
+    'categories.apps.CategoriesConfig',
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 

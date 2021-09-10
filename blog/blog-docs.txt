@@ -1,0 +1,31 @@
+create and list :
+    api/v1/blog/articles/ ==>  list of articles
+
+    {
+        "title": "",  
+        "slug": "",   ==> this one is unique
+        "description": "",
+        "thumbnail": null, ==> url of image that has save to media folder
+        "publish": null, ==> default=timezone.now
+        "status": null, ==> auto_now_add=True
+        "author": null,
+        "article_category": null 
+    }
+...................................................
+filters :
+    api/v1/blog/articles/?status=d  ==> filter by status d= draft and p= publish
+    api/v1/blog/articles/?author=pk ==> filter by author primary key
+    api/v1/blog/articles/?slug=slug ==> filter by slug
+    api/v1/blog/articles/?title=title ==> filter by title
+...................................................    
+search:
+    api/v1/blog/articles/?search = title , author ,content ,slug
+...................................................    
+ordering:
+    api/v1/blog/articles/?ordering=publish or -publish
+    api/v1/blog/articles/?ordering=publish or -publish ==> published time
+    api/v1/blog/articles/?ordering=status or -status ==> draf or publish
+
+...................................................
+
+

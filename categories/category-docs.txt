@@ -1,0 +1,13 @@
+create and list :
+    api/v1/blog/categories/   : to create a new category
+    {
+        "id": 2, #خودکار ساخته میشود
+        "title": "پزشکی",
+        "slug": "test-slug", 
+        "status": true, #برای نمایش یا عدم نمایش دسته بندی
+        "position": 1 #این برای ترتیب دسته بندی ها است
+    }
+...................................................
+filters :
+    api/v1/categories/categories/?main_category=pk ==> filter by mail_category pk
+    api/v1/categories/categories/?sub_catesub_category=pk ==> filter by sub_category pk

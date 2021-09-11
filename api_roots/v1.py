@@ -5,5 +5,5 @@ urlpatterns = [
     path('users/',include('accounts.urls')),
     path('categories/',include('categories.urls')),
     path('gallery/',include('gallery.urls')),
-
+    path('school-signup/',include('school_signup.urls')),
 ]

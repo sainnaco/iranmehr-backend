@@ -32,7 +32,7 @@ class Article(models.Model):
                                  verbose_name=" دسته‌بندی اصلی", related_name="articles")
     description =RichTextUploadingField(null=True,blank=True,verbose_name="محتوا")
     # thumbnails = models.ImageField(upload_to="images/article",blank=True,null=True,verbose_name="تصویر ۶۴۰x۳۶۰ مقاله")
-    thumbnail = models.ImageField(default='test.png',null=True,blank=True,upload_to="images/article")
+    thumbnail = models.ImageField(default='test.png',null=True,blank=True,upload_to="images/article",verbose_name='عکس بند انگشتی')
     publish = models.DateTimeField(
         default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True)
@@ -56,7 +56,8 @@ class Article(models.Model):
     jpublish.short_description = "زمان انتشار"
 
     def thumbnail_tag(self):
-        return format_html("<img width=100 height=75 style='border-radius: 5px;' src='{}'>".format(self.thumbnail.url))
+        if self.thumbnail:
+            return format_html("<img width=100 height=75 style='border-radius: 5px;' src='{}'>".format(self.thumbnail.url))
     thumbnail_tag.short_description = "عکس"
 
     # def preview_url(self):

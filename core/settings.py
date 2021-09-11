@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'adobe.apps.AdobeConfig',
     'categories.apps.CategoriesConfig',
     'gallery.apps.GalleryConfig',
+    'school_signup.apps.SchoolSignupConfig',
 ]
 
 MIDDLEWARE = [

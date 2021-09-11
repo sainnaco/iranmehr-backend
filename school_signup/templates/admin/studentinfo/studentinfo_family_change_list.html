@@ -1,0 +1,30 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools %}
+<ul class="object-tools">
+    <li>
+        <form class="" id="sms-form" action="/send-email/" method="post">
+            {% csrf_token %}
+
+            <button class="button default" type="submit">ارسال ایمیل</button>
+
+        </form>
+    </li>
+    <li>
+        <form class="" id="sms-form" action="/send-sms-family/" method="post">
+            {% csrf_token %}
+
+            <button class="button default" type="submit">ارسال پیامک</button>
+
+        </form>
+    </li>
+</ul>
+<ul>
+    <p>از منوی جستجوی زیر امکان جستجو براساس نام والدین ، کد ملی والدین ، کد ملی دانش آموز و شغل والدین</p>
+
+</ul>
+<br />
+
+
+{{block.super}}
+{% endblock object-tools %}

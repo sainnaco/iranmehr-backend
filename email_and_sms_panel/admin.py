@@ -18,5 +18,5 @@ class EmailAdmin(admin.ModelAdmin):
     list_per_page = 50     
 
 admin.site.register(SmsPanel,SmsAdmin)
-admin.site.register(SmsPanel,SmsAdmin)
+admin.site.register(EmailPanel,EmailAdmin)
 

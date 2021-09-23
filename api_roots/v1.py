@@ -6,4 +6,6 @@ urlpatterns = [
     path('categories/',include('categories.urls')),
     path('gallery/',include('gallery.urls')),
     path('school-signup/',include('school_signup.urls')),
+    path('email-panel/',include('email_and_sms_panel.urls')),
+
 ]

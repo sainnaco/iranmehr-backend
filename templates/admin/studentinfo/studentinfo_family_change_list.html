@@ -2,14 +2,14 @@
 
 {% block object-tools %}
 <ul class="object-tools">
-    <li>
-        <form class="" id="sms-form" action="/send-email/" method="post">
+    <!-- <li>
+        <form class="" id="sms-form" action="comiunication-panel/send-email/" method="post">
             {% csrf_token %}
 
             <button class="button default" type="submit">ارسال ایمیل</button>
 
         </form>
-    </li>
+    </li> -->
     <li>
         <form class="" id="sms-form" action="/send-sms-family/" method="post">
             {% csrf_token %}

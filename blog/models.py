@@ -36,10 +36,9 @@ class Article(models.Model):
     publish = models.DateTimeField(
         default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d', verbose_name="وضعیت")
-    #view_count = models.IntegerField(default=1,blank=True,null=True ,verbose_name='تعداد بازدید')
+    view_count = models.IntegerField(default=1,blank=True,null=True ,verbose_name='تعداد بازدید')
 
     class Meta:
         verbose_name = "مقاله"

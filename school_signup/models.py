@@ -5,6 +5,10 @@ from .choices import *
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+class EmailManager(models.Manager):
+    def email_address(self):
+        return self.filter(choose_to_send_email=True)
+
 class Student(models.Model):
     signer = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='کاربرثبت نام کننده')
@@ -16,6 +20,7 @@ class Student(models.Model):
         verbose_name='جنسیت', choices=SEX_CHOICES, max_length=50, null=True, blank=True)
     social_id = models.CharField(
         verbose_name='شماره ملی', max_length=10, null=True, blank=True)
+    email = models.EmailField(blank=True , null=True , verbose_name='ایمیل')
     phone_number = models.CharField(max_length=11,
                                     verbose_name='شماره تلفن', null=True, blank=True)
     birth_day = models.CharField(
@@ -83,6 +88,8 @@ class Student(models.Model):
     choose_to_send_email = models.BooleanField(
         default=False, verbose_name='انتخاب برای ارسال ایمیل')  
 
+    objects = EmailManager()
+
     class Meta:
         verbose_name = 'اطلاعات فردی دانش آموزان'
         verbose_name_plural = 'اطلاعات فردی دانش آموزان'
@@ -113,6 +120,7 @@ class Family(models.Model):
     #s = models.ManyToManyField(Student, verbose_name='دانش آموز', blank=True)
     phone_number = models.CharField(max_length=11,
                                     verbose_name='شماره تلفن', null=True, blank=True)
+    email = models.EmailField(blank=True , null=True , verbose_name='ایمیل')
     social_id = models.CharField(
         verbose_name='شماره ملی عضو خانواده', max_length=10, null=True, blank=True)
     s_id = models.CharField(
@@ -132,6 +140,10 @@ class Family(models.Model):
         default=False, verbose_name='انتخاب برای ارسال پیامک')
     choose_to_send_email = models.BooleanField(
         default=False, verbose_name='انتخاب برای ارسال ایمیل')
+
+    objects = EmailManager()
+
+
     class Meta:
         verbose_name = 'اطلاعات خوانوادگی دانش آموزان'
         verbose_name_plural = 'اطلاعات خوانوادگی دانش آموزان'

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'ckeditor',
     'ckeditor_uploader',
+    'celery',
 
     # my apps
     'blog.apps.BlogConfig',
@@ -55,6 +56,8 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'gallery.apps.GalleryConfig',
     'school_signup.apps.SchoolSignupConfig',
+    'email_and_sms_panel.apps.EmailAndSmsPanelConfig',
+    'lms.apps.LmsConfig',
 ]
 
 MIDDLEWARE = [
@@ -210,6 +213,7 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'iran.mehr.email.test@gmail.com'
 EMAIL_HOST_PASSWORD = 'ejwybtrnqiifaccz'
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'iran.mehr.email.test@gmail.com'
 
 # تنظیمات جوسر
 DJOSER = {

@@ -28,6 +28,8 @@ urlpatterns = [
     path('api/v1/', include('api_roots.v1')),
     path('adobe-api/', include('adobe.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('comiunication-panel/', include('email_and_sms_panel.urls')),
+
     # path('auth/', include('djoser.social.urls')),
 ]
 

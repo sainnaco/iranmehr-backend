@@ -5,7 +5,7 @@ from .actions import *
 
 admin.site.site_header = 'پنل مدیریت وب سایت مدرسه ایران مهر'
 admin.site.site_title = 'ایران مهر'
-admin.site.index_title = 'مدیریت اطلاعات شخصی و خانوادگی'
+admin.site.index_title = 'مدیریت سایت'
     
 
 class StudentAdmin(admin.ModelAdmin):

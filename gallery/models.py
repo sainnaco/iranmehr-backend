@@ -13,6 +13,12 @@ class Pictures(models.Model):
         if self.thumbnail:
             return format_html("<img width=100 height=75 style='border-radius: 5px;' src='{}'>".format(self.thumbnail.url))
 
+    class Meta:
+        verbose_name = 'گالری عکس '
+        verbose_name_plural = 'گالری عکس ها '
+
+    def __str__(self):
+        return self.subject
 
 
 class Image(models.Model):
@@ -29,6 +35,13 @@ class Videos(models.Model):
         if self.thumbnail:
             return format_html("<img width=100 height=75 style='border-radius: 5px;' src='{}'>".format(self.thumbnail.url))
 
+    class Meta:
+        verbose_name = 'گالری فیلم '
+        verbose_name_plural = 'گالری فیلم ها '
+
+
+    def __str__(self):
+        return self.subject
 
 class Clips(models.Model):
     clip = models.FileField(upload_to="media/videos", verbose_name='فیلم')  

@@ -7,7 +7,12 @@ from blog.models import *
 from .serializers import *
 from permissions.permissions import IsStaffOrReadOnly,IsAuthorOrReadOnly
 from django.contrib.auth import get_user_model
+from rest_framework.decorators import action
 from rest_framework import filters #خصوصی بدیم ولی گلوبال دادیم
+from django.db.models import F
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+
 
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
@@ -25,5 +30,15 @@ class ArticleViewSet(ModelViewSet):
         else:
             permission_classes = [IsStaffOrReadOnly, IsAuthorOrReadOnly]
         return [permission() for permission in permission_classes]
+
+    def retrieve(self, request, pk=None):
+        queryset = Article.objects.all()
+        article = get_object_or_404(queryset, pk=pk)
+        article.view_count +=1
+        article.save()
+        serializer = ArticleSerializer(article)
+        return Response(serializer.data)
+
+
 
 

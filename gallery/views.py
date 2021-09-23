@@ -8,7 +8,7 @@ from .models import *
 class PictureViewSet(ModelViewSet):
     queryset = Pictures.objects.all()
     serializer_class = PictureSerializer
-    filterset_fields = ['subjecet','category','images']
+    filterset_fields = ['subjecet','category']
     search_fields = ['subjecet','category']
     # ordering_fields = ['']
 

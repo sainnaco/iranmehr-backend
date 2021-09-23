@@ -1,0 +1,44 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools %}
+
+<ul class="object-tools">
+
+    <li>
+        <form class="" id="sms-form" action="/send-email/" method="post">
+            {% csrf_token %}
+
+            <!-- <input type="text" name="sms-text" class="vTextField"> -->
+            <button class="button default" type="submit">ارسال ایمیل</button>
+
+        </form>
+    </li>
+    <li>
+        <form class="" id="sms-form" action="/send-sms/" method="post">
+            {% csrf_token %}
+
+            <!-- <input type="text" name="sms-text" class="vTextField"> -->
+            <button class="button default" type="submit">ارسال پیامک</button>
+
+        </form>
+    </li>
+</ul>
+<ul>
+    <p> از قسمت جستجوی زیر قابلیت جستجو بر اساس نام ، نام خانوادگی ، کد ملی ، محل تولد و آدرس</p>
+    <!-- <li>
+        <a href="" class=""></a>
+    </li> -->
+</ul>
+<br />
+
+<!-- <script>
+    let sms = document.querySelector('#sms-form')
+    sms.querySelector('input[name="sms-text"]').addEventListener('click', )
+</script> -->
+
+{{block.super}}
+{% endblock object-tools %}
+
+<!-- {% block toolbar %}
+  <p>توضیحات</p>
+{% endblock toolbar %} -->
